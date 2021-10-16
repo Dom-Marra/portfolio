@@ -1,0 +1,61 @@
+@use './variables' as vars;
+
+//HTML & Body
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: vars.$quick;
+    line-height: 1.6;
+    color: vars.$text-color;
+}
+
+//Headings
+h1 {
+    font-size: 3.4rem;
+    line-height: 1.6;
+    font-family: vars.$roboto;
+}
+
+h2 {
+    font-size: 2.8rem;
+    line-height: 1.6;
+    font-family: vars.$quick;
+}
+
+//root & main
+#root, main {
+    height: 100%;
+    width: 100%;
+}
+
+#root {
+
+    @media screen and (min-width: 35em) {
+        display: grid;
+        grid-template-columns: 5rem 1fr;
+    }
+
+    @media screen and (min-width: 56em) {
+        grid-template-columns: 17.2rem 1fr;
+    }
+}
+
+main {
+    margin-top: 3.75rem;
+
+    @media screen and (min-width: 35em) {
+        margin: 0;
+        grid-column: 2 / 3;
+    }
+}
+
+//Links
+a {
+    text-decoration: none;
+
+    &:focus,
+    &:focus-within {
+        outline: none;
+    }
+}
