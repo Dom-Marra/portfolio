@@ -1,0 +1,128 @@
+@use '../variables' as vars;
+@use '../mixins' as mix;
+
+.home-page-section {
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: vars.$p-normal;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    .home-content-wrapper {
+        padding: 0 1rem;
+        position: relative;
+        z-index: 1;
+        padding: 10rem 1rem;
+        box-sizing: border-box;
+
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        p {
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .s-text-color {
+            color: vars.$s-normal;
+        }
+
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+
+            .dm-btn {
+                color: vars.$text-color;
+                padding: 0.75rem 1.25rem;
+                background-color: vars.$p-light;
+                @include mix.drop-box;
+                display: flex;
+                align-items: center;
+                
+                &:not(:first-of-type) {
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        background-color: vars.$s-light;
+        position: absolute;
+        width: 20rem;
+        height: 20rem;
+        border-radius: 100%;
+        z-index: 0;
+        transition: all 0.15s ease-in-out;
+    }
+
+    &::before {
+        top: 0;
+        right: 0;
+        transform: translate(30%, -50%) skew(-18deg, 13deg);
+    }
+
+    &::after {
+        bottom: 0;
+        left: 0;
+        transform: translate(-30%, 50%) skew(-12deg, 10deg);
+    }
+
+    @media screen and (min-width: 35em) {
+
+        .home-content-wrapper {
+            padding: 12.5rem 1rem;
+    
+            h1 {
+                font-size: 4rem;
+            }
+        }
+
+        &::before,
+        &::after {
+            width: 25rem;
+            height: 25rem;
+        }
+        
+    }
+
+    @media screen and (min-width: 56em) {
+
+        .home-content-wrapper {
+            padding: 12vw 1rem;
+    
+            h1 {
+                font-size: 5vw;
+            }
+    
+            p {
+                font-size: 3vw;
+            }
+    
+            .links-container {
+    
+                .dm-btn {
+                    font-size: 1.25vw;
+                }
+            }
+        }
+
+        &::before,
+        &::after {
+            width: 28vw;
+            height: 28vw;
+        }
+        
+    }
+}

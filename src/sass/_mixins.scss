@@ -1,0 +1,31 @@
+@use './variables' as vars;
+
+@mixin drop-box($drop-size: 0.3rem) {
+    position: relative;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 0 vars.$s-light;
+    bottom: 0;
+    right: 0;
+
+    &:hover,
+    &:focus-within,
+    &:focus {
+        bottom: $drop-size;
+        right: $drop-size;
+        box-shadow: $drop-size $drop-size vars.$s-light;
+
+        &::after {
+            top: $drop-size;
+            left: $drop-size;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+}
