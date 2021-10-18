@@ -1,9 +1,12 @@
+import React from 'react';
+
 import { useState, useRef, useEffect } from 'react';
 
 import Logo from '../images/Logo.svg';
 
-import { NavLink } from 'react-router-dom';
 import { Menu, X, Home, User, Code, Mail } from 'react-feather';
+
+import { Link } from 'gatsby';
 
 
 function Navbar() {
@@ -47,9 +50,9 @@ function Navbar() {
 
     return (
         <header className="main-header">
-            <NavLink to="/" className="header-logo" exact onClick={() => {}}>
+            <Link to="/" className="header-logo" onClick={() => {}}>
                 <img src={Logo} alt="Dominic Marra logo" />
-            </NavLink>
+            </Link>
             
             <button 
                 aria-label="Toggle menu" 
@@ -64,24 +67,24 @@ function Navbar() {
                 
                 <ul>
                     <li>
-                        <NavLink to="/" activeClassName="active-nav-link" exact onClick={() => setMobileNavSate('closed')}>
+                        <Link to="/" activeClassName="active-nav-link" onClick={() => setMobileNavSate('closed')}>
                             { navState !== 'tab' ? 'Home' : <Home />}
-                        </NavLink>
+                        </Link>
                     </li>
                     <li>
-                        <NavLink to="/aboutme" activeClassName="active-nav-link" exact onClick={() => setMobileNavSate('closed')}>
+                        <Link to="/about" activeClassName="active-nav-link" onClick={() => setMobileNavSate('closed')}>
                             { navState !== 'tab' ? 'About Me' : <User />}
-                        </NavLink>
+                        </Link>
                     </li>
                     <li>
-                        <NavLink to="/projects" activeClassName="active-nav-link" exact onClick={() => setMobileNavSate('closed')}>
+                        <Link to="/projects" activeClassName="active-nav-link" onClick={() => setMobileNavSate('closed')}>
                             { navState !== 'tab' ? 'Projects' : <Code />}
-                        </NavLink>
+                        </Link>
                     </li>
                     <li>
-                        <NavLink to="/contactme" activeClassName="active-nav-link" exact onClick={() => setMobileNavSate('closed')}>
+                        <Link to="/contactme" activeClassName="active-nav-link" onClick={() => setMobileNavSate('closed')}>
                             { navState !== 'tab' ? 'Contact Me' : <Mail />}
-                        </NavLink>
+                        </Link>
                     </li>
                 </ul>
             </nav>

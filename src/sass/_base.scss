@@ -8,28 +8,29 @@ html, body {
     font-family: vars.$quick;
     line-height: 1.6;
     color: vars.$text-color;
+    background-color: vars.$p-normal;
 }
 
 //Headings
 h1 {
-    font-size: 3.4rem;
+    font-size: 3.2rem;
     line-height: 1.6;
     font-family: vars.$roboto;
 }
 
 h2 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     line-height: 1.6;
     font-family: vars.$quick;
 }
 
 //root & main
-#root, main {
+#___gatsby, #gatsby-focus-wrapper, main {
     height: 100%;
     width: 100%;
 }
 
-#root {
+#gatsby-focus-wrapper {
 
     @media screen and (min-width: 35em) {
         display: grid;
