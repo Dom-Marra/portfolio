@@ -6,10 +6,12 @@ import '../sass/styles.scss';
 
 //Page Imports
 import HomePage from "../pages/HomePage";
+import Navbar from "../components/Navbar";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <main>
         <Switch>
           <Route path="/" exact><HomePage /></Route>

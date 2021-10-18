@@ -37,7 +37,7 @@ h2 {
     }
 
     @media screen and (min-width: 56em) {
-        grid-template-columns: 17.2rem 1fr;
+        grid-template-columns: 13rem 1fr;
     }
 }
 
@@ -52,6 +52,7 @@ main {
 
 //Links
 a {
+    font-family: vars.$roboto;
     text-decoration: none;
 
     &:focus,
