@@ -1,0 +1,96 @@
+@use '../variables' as vars;
+
+.about-me-section {
+    padding: 0 1rem 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 30rem;
+    margin: auto;
+
+    h1 {
+        text-align: center;
+        padding-top: 2rem;
+    }
+
+    .profile-pic {
+        display: block;
+        border-radius: 50%;
+        background-color: vars.$s-normal;
+        margin: 4rem auto;
+        max-width: 100%;
+        width: 20rem;
+        height: auto;
+    }
+
+    
+
+    .skills-container {
+        margin: auto;
+        width: 100%;
+        max-width: 25rem;
+
+        h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-bar {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+    
+            .progress-bar-background {
+                width: 100%;
+                height: 0.6rem;
+                background-color: vars.$s-lightest;
+    
+                .progress-bar {
+                    height: 100%;
+                    background-color: vars.$s-normal;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: 78em) {
+        width: 90%;
+        max-width: 85rem;
+        display: grid;
+        grid-template-areas: 
+        'header header'
+        'description picture'
+        'skills picture';
+        grid-template-columns: minmax(auto, 35rem) minmax(auto, 40rem);
+        grid-template-rows: auto auto 1fr;
+        align-items: start;
+        column-gap: 10rem;
+        height: 100%;
+
+        h1 {
+            text-align: left;
+            padding: 1.5rem 0 0;
+            grid-area: header;
+            height: auto;
+        }
+
+        p {
+            max-width: 35rem;
+            grid-area: description;
+        }
+
+        .profile-pic {
+            margin:  3rem auto;
+            width: 100%;
+            max-width: 25rem;
+            grid-area: picture;
+        }
+
+        .skills-container {
+            margin: auto 0 3rem;
+            max-width: 35rem;
+            grid-area: skills;
+        }
+    }
+    
+}
