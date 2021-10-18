@@ -21,11 +21,11 @@ const AboutMe = ({ data }) => {
                 <div className="skills-container">
                     <h2>Skills</h2>
                     {
-                        data.wpPage.aboutMeFields.skills.map(skill => (
-                            <div className="skill-bar">
+                        data.wpPage.aboutMeFields.skills.map((skill, index) => (
+                            <div className="skill-bar" key={index}>
                                 <p>{skill.skill.skillName}</p>
                                 <p>{skill.skill.skillPercent}%</p>
-                                <div class="progress-bar-background">
+                                <div className="progress-bar-background">
                                     <div className="progress-bar" style={{width: skill.skill.skillPercent + '%'}}></div>
                                 </div>
                             </div>
