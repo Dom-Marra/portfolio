@@ -1,5 +1,4 @@
 const path = require(`path`)
-const chunk = require(`lodash/chunk`)
 
 /**
  * exports.createPages is a built-in Gatsby Node API.
@@ -45,8 +44,8 @@ const createIndividualProjectPages = async ({ projects, gatsbyUtilities }) =>
           id: project.id,
 
           // We also use the next and previous id's to query them and add links!
-          previousProjectId: previous ? previous.id : null,
-          nextProjectId: next ? next.id : null,
+          previousProjectId: previous ? previous.id : projects[0].project.id,
+          nextProjectId: next ? next.id : projects[projects.length - 1].project.id,
         },
       })
     )
