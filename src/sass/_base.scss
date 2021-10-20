@@ -25,9 +25,19 @@ h2 {
 }
 
 //root & main
-#___gatsby, #gatsby-focus-wrapper, main {
+#___gatsby, main {
     height: 100%;
     width: 100%;
+}
+
+#gatsby-focus-wrapper {
+    height: 100%;
+    width: 100%;
+
+    @media screen and (min-width: 35em) {
+        height: auto;
+        min-height: 100%;
+    }
 }
 
 #gatsby-focus-wrapper {
