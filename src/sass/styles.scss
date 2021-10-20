@@ -2,6 +2,7 @@
     - Normalize styles
     - Base page stlying
 */
+@use './normalize.css';
 @use './base';
 
 /* ---- Components ---- */
@@ -10,3 +11,7 @@
 /* ---- Pages ---- */
 @use './pages/homepage';  
 @use './pages/aboutme';
+@use './pages/projects';
+
+/* ---- Templates ---- */
+@use './templates/project';
