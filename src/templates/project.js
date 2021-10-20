@@ -6,9 +6,10 @@ import parse from 'html-react-parser';
 
 import { GitHub, Link } from 'react-feather';
 import Seo from '../components/seo';
+import Project from '../components/project';
 
-const Project = ({ data }) => {
-
+const ProjectTemplate = ({ data }) => {
+    console.log(data);
     return (
         <Layout>
             <Seo 
@@ -57,18 +58,26 @@ const Project = ({ data }) => {
                     <h2>Challenges</h2>
                     {parse(data.project.projectFields.challenges)}
                 </section>
+
+                <section className="project-section other-projects">
+                    <h2>Other Projects</h2>
+
+                    {data.next && <Project project={data.next} />}
+                    {data.previous && <Project project={data.previous} />}
+                </section>
+
             </article>
         </Layout>
     )
 } 
 
-export default Project;
+export default ProjectTemplate;
 
 export const projectQuery = graphql`
     query ProjectByID(
         $id: String!
-        $previousPostId: String
-        $nextPostId: String
+        $previousProjectId: String
+        $nextProjectId: String
     ) {
         project: wpProject(id: { eq: $id }) {
             projectFields {
@@ -85,14 +94,30 @@ export const projectQuery = graphql`
             title
         }
 
-        previous: wpProject(id: { eq: $previousPostId }) {
+        previous: wpProject(id: { eq: $previousProjectId }) {
             slug
             title
+            featuredImage {
+                node {
+                    sourceUrl
+                }
+            }
+            projectFields {
+                caption
+            }
         }
         
-        next: wpProject(id: { eq: $nextPostId }) {
+        next: wpProject(id: { eq: $nextProjectId }) {
             slug
             title
+            featuredImage {
+                node {
+                    sourceUrl
+                }
+            }
+            projectFields {
+                caption
+            }
         }
     }
 `;
