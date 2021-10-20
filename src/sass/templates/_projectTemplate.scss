@@ -34,8 +34,8 @@
                 }
 
                 svg {
-                    height: 2rem;
-                    width: 2rem;
+                    height: 1.7rem;
+                    width: 1.7rem;
                     stroke-width: 0.1rem;
                 }
             }
@@ -45,9 +45,11 @@
     .project-section {
         display: inline-block;
         margin: 1rem auto;
+        width: 100%;
 
         h2 {
             text-align: center;
+            margin-bottom: 2.5rem;
         }
     }
 
@@ -61,12 +63,21 @@
         max-width: 100%;
         display: flex;
         flex-wrap: wrap;
-        margin-top: 1rem;
+        margin-top: 2rem;
+
         .tech {
-            margin: 0.75rem 0.75rem 0.75rem 0;
+            margin: 1rem 1rem 1rem 0;
             padding: 0.3rem 0.75rem;
-            border-radius: 0.5rem;
             background-color: vars.$s-dark;
+        }
+    }
+
+    .project-tile-link {
+        width: 100%;
+        margin-top: 1rem;
+
+        &:first-of-type {
+            margin-bottom: 2rem;
         }
     }
     
@@ -103,5 +114,24 @@
             text-align: left;
         }
 
+        .other-projects {
+            display: flex;
+            flex-wrap: wrap;
+
+            h2 {
+                width: 100%;
+            }
+
+            .project-tile-link {
+                display: inline-block;
+                flex: 1;
+        
+                &:first-of-type {
+                    margin-bottom: 0;
+                    margin-right: 2rem;
+                }
+            }
+
+        }
     }
 }
