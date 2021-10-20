@@ -2,8 +2,8 @@ import React from 'react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import { graphql, Link } from "gatsby";
-
+import { graphql } from "gatsby";
+import Project from '../components/project';
 
 const ProjectsPage = ({ data }) => {
     const projects = data.allWpProject.nodes;
@@ -19,17 +19,7 @@ const ProjectsPage = ({ data }) => {
 
                 {projects.map(project => (
 
-                    <Link to={project.slug} key={project.slug} className="project-tile-link">
-                        <figure className="project-tile">
-                            <div className="project-tile-image-wrapper">
-                                <img src={project.featuredImage.node.sourceUrl} alt={`Image of ${project.title}`} />
-                            </div>
-                            <div className="project-tile-description">
-                                <p>{project.title}</p>
-                                <p>{project.projectFields.caption}</p>
-                            </div>
-                        </figure>
-                    </Link>
+                    <Project key={project.slug} project={project} />
 
                 ))}
 
