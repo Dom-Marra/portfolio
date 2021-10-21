@@ -113,10 +113,10 @@
     }
 
     @media screen and (min-width: 35em) {
-        position: static;
-        height: 100%;
+        position: sticky;
+        height: 100vh;
         flex-direction: column;
-
+        
         .header-logo {
             display: block;
             height: auto;
