@@ -7,6 +7,7 @@ import parse from 'html-react-parser';
 import { GitHub, Link } from 'react-feather';
 import Seo from '../components/seo';
 import Project from '../components/project';
+import TechIcons from '../components/techIcons';
 
 const ProjectTemplate = ({ data }) => {
     console.log(data);
@@ -36,14 +37,7 @@ const ProjectTemplate = ({ data }) => {
                     </div>
                 </header>
                 <img className="mockup-image" src={data.project.projectFields.mockUpImage.sourceUrl} alt="" />
-                {data.project.projectFields.techStack?.length > 0 &&
-                (<div className="tech-stack">
-                    {data.project.projectFields.techStack.map((tech, i) => (
-                        <span key={tech} className="tech">{tech}</span>
-                    ))}
-                </div>)}
                 
-
                 <section className="project-section">
                     <h2>Overview</h2>
                     {parse(data.project.projectFields.overview)}
@@ -58,6 +52,18 @@ const ProjectTemplate = ({ data }) => {
                     <h2>Challenges</h2>
                     {parse(data.project.projectFields.challenges)}
                 </section>
+
+                {data.project.projectFields.techStack?.length > 0 &&
+                (
+                    <section className="project-section">
+                        <h2>Tech Stack</h2>
+                        <div className="tech-stack">
+                            {data.project.projectFields.techStack.map((tech, i) => (
+                                <TechIcons key={tech} icon={tech} />
+                            ))}
+                        </div>
+                    </section>
+                )}
 
                 <section className="project-section other-projects">
                     <h2>Other Projects</h2>
