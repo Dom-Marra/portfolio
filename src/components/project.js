@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "gatsby";
 import { Link as FLink } from "react-feather";
 
-const Project = ({ project }) => (
-    <Link to={`/projects/${project.slug}`} className="project-tile-link">
+const Project = ({ project }, ref) => (
+    <Link ref={ref} to={`/projects/${project.slug}`} className="project-tile-link">
         <figure className="project-tile">
             <div className="project-tile-image-wrapper">
                 <img src={project.featuredImage.node.sourceUrl} alt={project.title} />
@@ -17,4 +17,4 @@ const Project = ({ project }) => (
     </Link>
 )
 
-export default Project;
+export default React.forwardRef(Project);
