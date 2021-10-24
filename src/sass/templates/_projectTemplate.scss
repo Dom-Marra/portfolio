@@ -44,8 +44,15 @@
 
     .project-section {
         display: inline-block;
-        margin: 1rem auto;
+        margin: 2.5rem auto;
         width: 100%;
+        box-sizing: border-box;
+
+        &:not(.other-projects) {
+            padding: 1rem 1.5rem 2rem;
+            border-left: 0.4rem solid vars.$s-light;
+            background-color: vars.$p-dark;
+        }
 
         h2 {
             text-align: center;
@@ -64,11 +71,16 @@
         display: flex;
         flex-wrap: wrap;
         margin-top: 2rem;
+        justify-content: space-evenly;
 
-        .tech {
-            margin: 1rem 1rem 1rem 0;
+        .tech-icon {
+            margin: 1rem 0.75rem;
             padding: 0.3rem 0.75rem;
-            background-color: vars.$s-dark;
+
+            svg {
+                height: 2rem;
+                width: 2rem;
+            }
         }
     }
 
