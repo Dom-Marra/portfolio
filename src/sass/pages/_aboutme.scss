@@ -1,4 +1,5 @@
 @use '../variables' as vars;
+@use '../mixins' as mix;
 
 .about-me-section {
     padding: 1rem;
@@ -8,45 +9,46 @@
     margin: auto;
 
     h1 {
+        @include mix.reveal-side-left(0.55s);
         text-align: center;
         padding-bottom: 1rem;
     }
 
+    .description {
+        @include mix.reveal-side-left(0.55s);
+    }
+
     .profile-pic {
         display: block;
-        border-radius: 50%;
-        background-color: vars.$s-normal;
+        box-shadow: 0.4rem 0.4rem vars.$s-light;
         margin: 4rem auto;
         max-width: 100%;
         width: 20rem;
         height: auto;
+        box-sizing: border-box;
+        @include mix.reveal-side-right(0.55s);
     }
 
     .skills-container {
         margin: auto;
         width: 100%;
-        max-width: 25rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
 
         h2 {
-            margin-bottom: 0.5rem;
+            width: 100%;
+            margin-bottom: 2rem;
+            @include mix.reveal-up(0.55s);
         }
 
-        .skill-bar {
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-    
-            .progress-bar-background {
-                width: 100%;
-                height: 0.6rem;
-                background-color: vars.$s-lightest;
-    
-                .progress-bar {
-                    height: 100%;
-                    background-color: vars.$s-normal;
-                }
+        .tech-icon {
+            margin: 0.75rem 1.2rem;
+            @include mix.reveal-pop-up(0.55s);
+
+            svg {
+                width: 3rem;
+                height: 3rem;
             }
         }
     }
@@ -70,29 +72,32 @@
         grid-template-columns: minmax(auto, 35rem) minmax(auto, 40rem);
         grid-template-rows: auto auto 1fr;
         align-items: start;
-        column-gap: 10rem;
+        column-gap: 10%;
         height: 100%;
 
         h1 {
             text-align: left;
             grid-area: header;
             height: auto;
+            padding-bottom: 0;
         }
 
-        p {
+        .description {
             max-width: 35rem;
             grid-area: description;
         }
 
         .profile-pic {
-            margin:  3rem auto;
-            width: 100%;
-            max-width: 25rem;
+            margin: 0 0 8rem;
+            align-self: center;
+            justify-self: end;
+            width: 25rem;
+            max-width: 100%;
             grid-area: picture;
         }
 
         .skills-container {
-            margin: auto 0 3rem;
+            margin: auto;
             max-width: 35rem;
             grid-area: skills;
         }

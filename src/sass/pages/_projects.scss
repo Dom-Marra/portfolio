@@ -12,10 +12,12 @@
     h1 {
         text-align: center;
         padding-bottom: 1rem;
+        @include mix.reveal-side-left;
     }
 
     .project-tile-link {
         margin: 1rem;
+        @include mix.reveal-pop-up;
     }
 
     @media screen and (min-width: 35em) {
