@@ -1,0 +1,59 @@
+.tech-icon {
+    display: inline-block;
+
+    svg {
+        display: block;
+        margin: auto;
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    p {
+        margin-top: 0.5rem;
+        text-align: center;
+    }
+
+    .html5 {
+        fill: #E34F26;
+    }
+
+    .angular {
+        fill: #DD0031;
+    }
+
+    .react {
+        fill: #61DAFB;
+    }
+
+    .wordpress {
+        fill: #21759B;
+    }
+
+    .js {
+        fill: #F7DF1E;
+    }
+
+    .jquery {
+        fill: #0769AD;
+    }
+
+    .php {
+        fill: #777BB4;
+    }
+
+    .css3 {
+        fill: #1572B6;
+    }
+
+    .scss {
+        fill: #CC6699;
+    }
+
+    .ts {
+        fill: #3178C6;
+    }
+
+    .gatsby {
+        fill: #663399;
+    }
+}
