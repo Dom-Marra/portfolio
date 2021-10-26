@@ -32,7 +32,7 @@ const useOnScreen = (entries, margin = '0px') => {
         return () => {
             observer.current.disconnect();
         }
-    }, []);
+    }, [entries]);
 
     return intersects;
 }
