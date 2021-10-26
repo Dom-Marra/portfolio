@@ -1,4 +1,4 @@
-import React, { useRef, createRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 import Layout from '../components/layout';
 import { graphql } from "gatsby";
@@ -13,35 +13,34 @@ import { CSSTransition } from 'react-transition-group';
 import useOnScreen from "../hooks/useOnScreen";
 
 const ProjectTemplate = ({ data }) => {
-
-    const titleRef = useRef();
-    const titleInScreen = useOnScreen([titleRef]);
-
-    const mockupRef = useRef();
-    const mockupInScreen = useOnScreen([mockupRef]);
-
-    const overviewRef = useRef();
-    const overviewInScreen = useOnScreen([overviewRef], '-50px');
-
-    const solutionRef = useRef();
-    const solutionInScreen = useOnScreen([solutionRef], '-50px');
-
-    const challengeRef = useRef();
-    const challengeInScreen = useOnScreen([challengeRef], '-50px');
-
-    const techStackRef = useRef();
-    const techStackInScreen = useOnScreen([techStackRef], '-50px');
-
     const [imageLoaded, setImageLoaded] = useState(false);
 
+    const titleRef = useRef();
+    const titleInScreen = useOnScreen([titleRef], '0px', imageLoaded);
+
+    const mockupRef = useRef();
+    const mockupInScreen = useOnScreen([mockupRef], '0px', imageLoaded);
+
+    const overviewRef = useRef();
+    const overviewInScreen = useOnScreen([overviewRef], '-50px', imageLoaded);
+
+    const solutionRef = useRef();
+    const solutionInScreen = useOnScreen([solutionRef], '-50px', imageLoaded);
+
+    const challengeRef = useRef();
+    const challengeInScreen = useOnScreen([challengeRef], '-50px', imageLoaded);
+
+    const techStackRef = useRef();
+    const techStackInScreen = useOnScreen([techStackRef], '-50px', imageLoaded);
+
     const projectsTitleRef = useRef();
-    const projectsTtitleInScreen = useOnScreen([projectsTitleRef]);
+    const projectsTtitleInScreen = useOnScreen([projectsTitleRef], '0px', imageLoaded);
 
     const projectPreviousRef = useRef();
-    const projectPreviousInScreen = useOnScreen([projectPreviousRef]);
+    const projectPreviousInScreen = useOnScreen([projectPreviousRef], '0px', imageLoaded);
 
     const projectNextRef = useRef();
-    const projectNextInScreen = useOnScreen([projectNextRef]);
+    const projectNextInScreen = useOnScreen([projectNextRef], '0px', imageLoaded);
 
 
     useEffect(() => {
