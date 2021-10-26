@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-const useOnScreen = (entries, margin = '0px') => {
+const useOnScreen = (entries, margin = '0px', lazyLoad) => {
     const [intersects, setIntersects] = useState(entries.map(() => false));
     const intersectsRef = useRef(entries.map(() => false));
     const observer = useRef();
@@ -32,7 +32,7 @@ const useOnScreen = (entries, margin = '0px') => {
         return () => {
             observer.current.disconnect();
         }
-    }, [entries]);
+    }, [lazyLoad]);
 
     return intersects;
 }
