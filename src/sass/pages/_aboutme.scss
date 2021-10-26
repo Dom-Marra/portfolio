@@ -44,7 +44,7 @@
 
         .tech-icon {
             margin: 0.75rem 1.2rem;
-            @include mix.reveal-pop-up(0.55s);
+            @include mix.reveal-pop-up(0.55s, 0.5);
 
             svg {
                 width: 3rem;
