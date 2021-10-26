@@ -66,9 +66,9 @@
     }
 }
 
-@mixin reveal-pop-up($duration: 0.5s) {
+@mixin reveal-pop-up($duration: 0.5s, $scale: 0.8) {
     opacity: 0;
-    transform: scale(0.5);
+    transform: scale($scale);
     transition: opacity $duration cubic-bezier(.5,1.63,.93,1.21), transform $duration cubic-bezier(.5,1.63,.93,1.21);
     position: relative;
     
