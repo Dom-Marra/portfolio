@@ -22,16 +22,13 @@ const ProjectTemplate = ({ data }) => {
     const mockupInScreen = useOnScreen([mockupRef], '0px', imageLoaded);
 
     const overviewRef = useRef();
-    const overviewInScreen = useOnScreen([overviewRef], '-50px', imageLoaded);
+    const overviewInScreen = useOnScreen([overviewRef], '-25px', imageLoaded);
 
-    const solutionRef = useRef();
-    const solutionInScreen = useOnScreen([solutionRef], '-50px', imageLoaded);
-
-    const challengeRef = useRef();
-    const challengeInScreen = useOnScreen([challengeRef], '-50px', imageLoaded);
+    const featureRef = useRef();
+    const featureInScreen = useOnScreen([featureRef], '-25px', imageLoaded);
 
     const techStackRef = useRef();
-    const techStackInScreen = useOnScreen([techStackRef], '-50px', imageLoaded);
+    const techStackInScreen = useOnScreen([techStackRef], '-25px', imageLoaded);
 
     const projectsTitleRef = useRef();
     const projectsTtitleInScreen = useOnScreen([projectsTitleRef], '0px', imageLoaded);
@@ -83,7 +80,12 @@ const ProjectTemplate = ({ data }) => {
                 </CSSTransition>
 
                 <CSSTransition in={mockupInScreen[0]} timeout={0}>
-                    <img ref={mockupRef} className="mockup-image" src={data.project.projectFields.mockUpImage.sourceUrl} alt="" />
+                    <picture ref={mockupRef} className="mockup-image">
+                        <source media="(min-width: 56em)" srcSet={data.project.projectFields.mockUpImage.sourceUrl} />
+                        <source media="(min-width: 35em)" srcSet={data.project.projectFields.mockUpImageTablet.sourceUrl} />
+                        <source media="(max-width: 35em)" srcSet={data.project.projectFields.mockUpImageMobile.sourceUrl} />
+                        <img src={data.project.projectFields.mockUpImage.sourceUrl} alt={data.project.projectFields.mockUpImage.sourceUrl} />
+                    </picture>
                 </CSSTransition>
 
                 <CSSTransition in={overviewInScreen[0]} timeout={0}>
@@ -93,17 +95,14 @@ const ProjectTemplate = ({ data }) => {
                     </section>
                 </CSSTransition>
 
-                <CSSTransition in={solutionInScreen[0]} timeout={0}>
-                    <section ref={solutionRef} className="project-section">
-                        <h2>Solution</h2>
-                        {parse(data.project.projectFields.solution)}
-                    </section>
-                </CSSTransition>
-
-                <CSSTransition in={challengeInScreen[0]} timeout={0}>
-                    <section ref={challengeRef} className="project-section">
-                        <h2>Challenges</h2>
-                        {parse(data.project.projectFields.challenges)}
+                <CSSTransition in={featureInScreen[0]} timeout={0}>
+                    <section ref={featureRef} className="project-section">
+                        <h2>Features</h2>
+                        <ul>
+                            { data.project.projectFields.features.map((feature, i) => (
+                                <li key={i}>{feature.feature}</li>
+                            )) }
+                        </ul>
                     </section>
                 </CSSTransition>
 
@@ -154,14 +153,21 @@ export const projectQuery = graphql`
     ) {
         project: wpProject(id: { eq: $id }) {
             projectFields {
-                challenges
-                githubRepoLink
-                liveLink
                 mockUpImage {
                     sourceUrl
                 }
+                mockUpImageTablet {
+                    sourceUrl
+                }
+                mockUpImageMobile {
+                    sourceUrl
+                }
+                features {
+                    feature
+                }
+                githubRepoLink
+                liveLink
                 overview
-                solution
                 techStack
             }
             title
