@@ -24,7 +24,7 @@ exports.createPages = async gatsbyUtilities => {
  */
 const createIndividualProjectPages = async ({ projects, gatsbyUtilities }) =>
   Promise.all(
-    projects.map(({ previous, project, next }) =>
+    projects.map(({ previous, project, next }, i) =>
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
       gatsbyUtilities.actions.createPage({
@@ -44,8 +44,8 @@ const createIndividualProjectPages = async ({ projects, gatsbyUtilities }) =>
           id: project.id,
 
           // We also use the next and previous id's to query them and add links!
-          previousProjectId: previous ? previous.id : projects[0].project.id,
-          nextProjectId: next ? next.id : projects[projects.length - 1].project.id,
+          previousProjectId: previous ? previous.id : i === 0 ? projects[projects.length - 1].project.id : null,
+          nextProjectId: next ? next.id : i === projects.length - 1 ? projects[0].project.id : null,
         },
       })
     )

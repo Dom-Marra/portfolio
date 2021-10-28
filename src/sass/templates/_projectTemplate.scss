@@ -1,4 +1,5 @@
 @use '../variables' as vars;
+@use '../mixins' as mix;
 
 .project-template {
     padding: 1rem;
@@ -8,6 +9,7 @@
     margin: auto;
 
     .project-header {
+        @include mix.reveal-up;
         padding-bottom: 1rem;
 
         .project-title {
@@ -44,8 +46,26 @@
 
     .project-section {
         display: inline-block;
-        margin: 1rem auto;
+        margin: 2.5rem auto;
         width: 100%;
+        box-sizing: border-box;
+
+        &:not(.other-projects) {
+            @include mix.reveal-up;
+            padding: 1rem 1.5rem 2rem;
+            border-left: 0.4rem solid vars.$s-light;
+            background-color: vars.$p-dark;
+        }
+
+        &.other-projects {
+            h2 {
+                @include mix.reveal-up;
+            }
+
+            .project-tile-link {
+                @include mix.reveal-pop-up;
+            }
+        }
 
         h2 {
             text-align: center;
@@ -55,8 +75,16 @@
 
     .mockup-image {
         display: block;
-        max-width: 85%;
-        margin: 4rem auto 0;
+        height: auto;
+        margin: 2rem auto;
+        @include mix.reveal-up;
+
+        source, img {
+            max-width: 100%;
+            display: block;
+            height: auto;
+            margin: auto;
+        }
     }
 
     .tech-stack {
@@ -64,11 +92,16 @@
         display: flex;
         flex-wrap: wrap;
         margin-top: 2rem;
+        justify-content: space-evenly;
 
-        .tech {
-            margin: 1rem 1rem 1rem 0;
+        .tech-icon {
+            margin: 1rem 0.75rem;
             padding: 0.3rem 0.75rem;
-            background-color: vars.$s-dark;
+
+            svg {
+                height: 2rem;
+                width: 2rem;
+            }
         }
     }
 
@@ -101,7 +134,7 @@
         max-width: 60rem;
 
         .project-header { 
-            margin-bottom: 6rem;
+            margin-bottom: 2rem;
 
             .project-title {
                 margin-top: 0;

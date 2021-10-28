@@ -8,11 +8,13 @@
 /* ---- Components ---- */
 @use './components/navbar';
 @use './components/project';
+@use './components/techicons';
 
 /* ---- Pages ---- */
 @use './pages/homepage';  
 @use './pages/aboutme';
 @use './pages/projects';
+@use './pages/notfound';
 
 /* ---- Templates ---- */
 @use './templates/projectTemplate';

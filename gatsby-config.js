@@ -9,7 +9,7 @@
 module.exports = {
   siteMetadata: {
     title: `Dominic Marra`,
-    description: `Portfolio website.`,
+    description: `Welcome to my portfolio website! View my projects or just learn a little bit more about me.`,
     author: `Dominic Marra`,
   },
   /**
@@ -34,7 +34,7 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `http://localhost/portfolio/graphql`,
+          `https://dominicmarra.com/portfolio/graphql`,
       },
     },
 
@@ -64,13 +64,13 @@ module.exports = {
       // See https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/?=gatsby-plugin-manifest
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter WordPress Blog`,
-        short_name: `GatsbyJS & WP`,
+        name: `Dominic Marra`,
+        short_name: `Dominic Marra`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
+        background_color: `#1d1d1d`,
+        theme_color: `#00AEEF`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/favicon-196x196.png`,
       },
     },
 

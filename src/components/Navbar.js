@@ -81,11 +81,6 @@ function Navbar() {
                             { navState !== 'tab' ? 'Projects' : <Code />}
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/contactme" activeClassName="active-nav-link" onClick={() => setMobileNavSate('closed')}>
-                            { navState !== 'tab' ? 'Contact Me' : <Mail />}
-                        </Link>
-                    </li>
                 </ul>
             </nav>
         </header>
