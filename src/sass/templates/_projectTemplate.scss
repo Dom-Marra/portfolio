@@ -75,9 +75,16 @@
 
     .mockup-image {
         display: block;
-        max-width: 85%;
-        margin: 4rem auto 0;
+        height: auto;
+        margin: 2rem auto;
         @include mix.reveal-up;
+
+        source, img {
+            max-width: 100%;
+            display: block;
+            height: auto;
+            margin: auto;
+        }
     }
 
     .tech-stack {
@@ -127,7 +134,7 @@
         max-width: 60rem;
 
         .project-header { 
-            margin-bottom: 6rem;
+            margin-bottom: 2rem;
 
             .project-title {
                 margin-top: 0;
