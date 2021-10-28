@@ -10,6 +10,8 @@ import useOnScreen from "../hooks/useOnScreen";
 
 const AboutMe = ({ data }) => {
     
+    const ABOUT_ME_DESC = data.wpPage.aboutMeFields.description.replaceAll(/<\/?p>/ig, '\n');
+    
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const titleRef = useRef();
@@ -27,7 +29,6 @@ const AboutMe = ({ data }) => {
     const skillRefs = useRef(data.wpPage.aboutMeFields.skills.map(() => createRef()));
     const skillsInScreen = useOnScreen(skillRefs.current, '0px', imageLoaded);
 
-
     useEffect(() => {
         const imagePreload = new Image();
         imagePreload.src = data.wpPage.aboutMeFields.image.sourceUrl;
@@ -43,6 +44,7 @@ const AboutMe = ({ data }) => {
         <Layout>
             <Seo
                 title="About Me"
+                description={ABOUT_ME_DESC}
             />
             <section className="about-me-section">
                 <CSSTransition in={titleInScreen[0]} timeout={0}>

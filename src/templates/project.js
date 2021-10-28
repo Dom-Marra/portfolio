@@ -13,6 +13,9 @@ import { CSSTransition } from 'react-transition-group';
 import useOnScreen from "../hooks/useOnScreen";
 
 const ProjectTemplate = ({ data }) => {
+    
+    const PROJECT_DESC = data.project.projectFields.overview.replaceAll(/<\/?p>/ig, '\n');
+
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const titleRef = useRef();
@@ -55,6 +58,7 @@ const ProjectTemplate = ({ data }) => {
         <Layout>
             <Seo
                 title={data.project.title}
+                description={PROJECT_DESC}
             />
             <article className="project-template">
                 <CSSTransition in={titleInScreen[0]} timeout={0}>
