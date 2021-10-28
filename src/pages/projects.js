@@ -17,7 +17,7 @@ const ProjectsPage = ({ data }) => {
 
     const projectRefs = useRef(projects.map(() => createRef()));
     const projectssInScreen = useOnScreen(projectRefs.current);
-    const [projectsDone, setProjectsDone] = useState(projects.map((_proj, i) => i !== 0 ? 0 : ANIMATION_TIME))
+    const [projectsDone, setProjectsDone] = useState(projects.map(() => ANIMATION_TIME))
 
     return (
         <Layout>
