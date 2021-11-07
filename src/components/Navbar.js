@@ -4,18 +4,21 @@ import { useState, useRef, useEffect } from 'react';
 
 import Logo from '../images/Logo.svg';
 
-import { Menu, X, Home, User, Code, Mail } from 'react-feather';
+import { Home, User, Code } from 'react-feather';
 
 import { Link } from 'gatsby';
 
 
 function Navbar() {
     const [navState, setNavState] = useState('');
-    const mediaQTab = useRef(window.matchMedia('(min-width: 35em)'));
-    const mediaQDesktop = useRef(window.matchMedia('(min-width: 56em)'));
+    const mediaQTab = useRef();
+    const mediaQDesktop = useRef();
     
 
     useEffect(() => {
+        mediaQTab.current = window.matchMedia('(min-width: 35em) and (min-height: 28em)');
+        mediaQDesktop.current = window.matchMedia('(min-width: 56em) and (min-height: 36em) ');
+
         const handleTabQuery = () => {
             if (mediaQTab.current.matches && navState !== 'tab' && !mediaQDesktop.current.matches) setNavState('tab');
             else if (navState !== '')setNavState('');
@@ -40,45 +43,33 @@ function Navbar() {
             desktopMedia.removeEventListener('change', handleDesktopQuery);
         }
     
-    }, [navState])
-
-    
-
-    function setMobileNavSate(state) {
-        if (!mediaQTab.current.matches && !mediaQDesktop.current.matches) setNavState(state);
-    }
+    }, [navState]);
 
     return (
         <header className="main-header">
-            <Link to="/" className="header-logo" onClick={() => {}}>
-                <img src={Logo} alt="Dominic Marra logo" />
-            </Link>
+            {   (navState === 'desktop' || navState === 'tab') &&
+
+                <Link to="/" className="header-logo" onClick={() => {}}>
+                    <img src={Logo} alt="Dominic Marra logo" />
+                </Link>
+            }
             
-            <button 
-                aria-label="Toggle menu" 
-                aria-expanded={navState === 'opened' ? 'true' : 'false'} 
-                className="menu-toggle" 
-                onClick={() => setMobileNavSate(navState === 'opened' ? 'closed' : 'opened')}
-            >
-                { navState === 'opened' ? <X /> : <Menu /> }
-            </button>
 
             <nav className={`main-nav ${navState}`}>
-                
                 <ul>
                     <li>
-                        <Link to="/" activeClassName="active-nav-link" onClick={() => setMobileNavSate('closed')}>
-                            { navState !== 'tab' ? 'Home' : <Home />}
+                        <Link to="/" activeClassName="active-nav-link" >
+                            { navState === 'desktop' ? 'Home' : <Home />}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/about" activeClassName="active-nav-link" onClick={() => setMobileNavSate('closed')}>
-                            { navState !== 'tab' ? 'About Me' : <User />}
+                        <Link to="/about/" activeClassName="active-nav-link" >
+                            { navState === 'desktop' ? 'About Me' : <User />}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/projects" activeClassName="active-nav-link" onClick={() => setMobileNavSate('closed')}>
-                            { navState !== 'tab' ? 'Projects' : <Code />}
+                        <Link to="/projects/" activeClassName="active-nav-link" >
+                            { navState === 'desktop' ? 'Projects' : <Code />}
                         </Link>
                     </li>
                 </ul>
