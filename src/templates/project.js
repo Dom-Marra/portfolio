@@ -182,9 +182,11 @@ export const projectQuery = graphql`
                     sourceUrl
                 }
                 mockUpImageTablet {
+                    sourceUrl
                     srcSet
                 }
                 mockUpImageMobile {
+                    sourceUrl
                     srcSet
                 }
                 features {
