@@ -1,0 +1,77 @@
+@use './variables' as vars;
+
+//HTML & Body
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: vars.$quick;
+    line-height: 1.6;
+    color: vars.$text-color;
+    background-color: vars.$p-normal;
+}
+
+//Headings
+h1 {
+    font-size: 2.5rem;
+    line-height: 1.6;
+    font-family: vars.$roboto;
+}
+
+h2 {
+    font-size: 1.8rem;
+    line-height: 1.6;
+    font-family: vars.$roboto;
+}
+
+//root & main
+#___gatsby {
+    display: flex;
+    min-height: 100%;
+    width: 100%;
+}
+
+#gatsby-focus-wrapper {
+    flex: 1;
+    min-height: 100%;
+    width: 100%;
+
+    @media screen and (min-width: 35em) and (min-height: 28em)  {
+        height: auto;
+        min-height: 100%;
+    }
+}
+
+#gatsby-focus-wrapper {
+    display: flex;
+
+    @media screen and (min-width: 35em) and (min-height: 28em)  {
+        display: grid;
+        grid-template-columns: 5rem 1fr;
+    }
+
+    @media screen and (min-width: 56em) and (min-height: 36em)  {
+        grid-template-columns: 13rem 1fr;
+    }
+}
+
+main {
+    flex: 1;
+    margin-bottom: 3.75rem;
+
+    @media screen and (min-width: 35em) and (min-height: 28em)  {
+        margin: 0;
+        grid-column: 2 / 3;
+    }
+}
+
+//Links
+a {
+    font-family: vars.$roboto;
+    text-decoration: none;
+
+    &:focus,
+    &:focus-within {
+        outline: none;
+    }
+}

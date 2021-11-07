@@ -1,0 +1,106 @@
+@use '../variables' as vars;
+@use '../mixins' as mix;
+
+.about-me-section {
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 30rem;
+    margin: auto;
+
+    h1 {
+        @include mix.reveal-side-left(0.55s);
+        text-align: center;
+        padding-bottom: 1rem;
+    }
+
+    .description {
+        @include mix.reveal-side-left(0.55s);
+    }
+
+    .profile-pic {
+        display: block;
+        box-shadow: 0.4rem 0.4rem vars.$s-light;
+        margin: 4rem auto;
+        max-width: 100%;
+        width: 20rem;
+        height: auto;
+        box-sizing: border-box;
+        @include mix.reveal-side-right(0.55s);
+    }
+
+    .skills-container {
+        margin: auto;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+
+        h2 {
+            width: 100%;
+            margin-bottom: 2rem;
+            @include mix.reveal-up(0.55s);
+        }
+
+        .tech-icon {
+            margin: 0.75rem 1.2rem;
+            @include mix.reveal-pop-up(0.55s, 0.5);
+
+            svg {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+    }
+
+    @media screen and (min-width: 35em) {
+        padding: 4rem 0 2rem;
+        width: 90%;
+
+        h1 {
+            margin-top: 0;
+        }
+    }
+
+    @media screen and (min-width: 78em) {
+        max-width: 85rem;
+        display: grid;
+        grid-template-areas: 
+        'header header'
+        'description picture'
+        'skills picture';
+        grid-template-columns: minmax(auto, 35rem) minmax(auto, 40rem);
+        grid-template-rows: auto auto 1fr;
+        align-items: start;
+        column-gap: 10%;
+        height: 100%;
+
+        h1 {
+            text-align: left;
+            grid-area: header;
+            height: auto;
+            padding-bottom: 0;
+        }
+
+        .description {
+            max-width: 35rem;
+            grid-area: description;
+        }
+
+        .profile-pic {
+            margin: 0 0 8rem;
+            align-self: center;
+            justify-self: end;
+            width: 25rem;
+            max-width: 100%;
+            grid-area: picture;
+        }
+
+        .skills-container {
+            margin: auto;
+            max-width: 35rem;
+            grid-area: skills;
+        }
+    }
+    
+}

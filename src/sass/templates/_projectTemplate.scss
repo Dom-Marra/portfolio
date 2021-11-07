@@ -1,0 +1,170 @@
+@use '../variables' as vars;
+@use '../mixins' as mix;
+
+.project-template {
+    padding: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 30rem;
+    margin: auto;
+
+    .project-header {
+        @include mix.reveal-up;
+        padding-bottom: 1rem;
+
+        .project-title {
+            text-align: center;
+        }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            a {
+                display: inline-block;
+                line-height: 0rem;
+                margin: 0 0.5rem;
+                color: vars.$text-color;
+                transition: color 0.15s ease-in-out;
+
+                &:hover,
+                &:focus,
+                &:focus-visible {   
+                    color: vars.$s-normal;
+                    cursor: pointer;
+                }
+
+                svg {
+                    height: 1.7rem;
+                    width: 1.7rem;
+                    stroke-width: 0.1rem;
+                }
+            }
+        }
+    }
+
+    .project-section {
+        display: inline-block;
+        margin: 2.5rem auto;
+        width: 100%;
+        box-sizing: border-box;
+
+        &:not(.other-projects) {
+            @include mix.reveal-up;
+            padding: 1rem 1.5rem 2rem;
+            border-left: 0.4rem solid vars.$s-light;
+            background-color: vars.$p-dark;
+        }
+
+        &.other-projects {
+            h2 {
+                @include mix.reveal-up;
+            }
+
+            .project-tile-link {
+                @include mix.reveal-pop-up;
+            }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    .mockup-image {
+        display: block;
+        height: auto;
+        margin: 2rem auto;
+        @include mix.reveal-up;
+
+        source, img {
+            max-width: 100%;
+            display: block;
+            height: auto;
+            margin: auto;
+        }
+    }
+
+    .tech-stack {
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        justify-content: space-evenly;
+
+        .tech-icon {
+            margin: 1rem 0.75rem;
+            padding: 0.3rem 0.75rem;
+
+            svg {
+                height: 2rem;
+                width: 2rem;
+            }
+        }
+    }
+
+    .project-tile-link {
+        width: 100%;
+        margin-top: 1rem;
+
+        &:first-of-type {
+            margin-bottom: 2rem;
+        }
+    }
+    
+
+    @media screen and (min-width: 35em) {
+        padding: 4rem 1rem 2rem;
+
+        .project-header { 
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .project-title { 
+                margin-right: 2.5rem;
+            }
+        }
+    }
+
+    @media screen and (min-width: 56em) {
+        width: 90%;
+        max-width: 60rem;
+
+        .project-header { 
+            margin-bottom: 2rem;
+
+            .project-title {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        .project-title,
+        .project-section h2 {
+            text-align: left;
+        }
+
+        .other-projects {
+            display: flex;
+            flex-wrap: wrap;
+
+            h2 {
+                width: 100%;
+            }
+
+            .project-tile-link {
+                display: inline-block;
+                flex: 1;
+        
+                &:first-of-type {
+                    margin-bottom: 0;
+                    margin-right: 2rem;
+                }
+            }
+
+        }
+    }
+}

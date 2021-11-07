@@ -1,0 +1,79 @@
+@use './variables' as vars;
+
+@mixin drop-box($drop-size: 0.3rem) {
+    position: relative;
+    transition: 0.2s ease-in-out;
+    box-shadow: 0 0 vars.$s-light;
+    bottom: 0;
+    right: 0;
+
+    &:hover,
+    &:focus-within,
+    &:focus {
+        bottom: $drop-size;
+        right: $drop-size;
+        box-shadow: $drop-size $drop-size vars.$s-light;
+
+        &::after {
+            top: $drop-size;
+            left: $drop-size;
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+}
+
+@mixin reveal-up($duration: 0.5s) {
+    opacity: 0;
+    transform: translateY(3rem);
+    transition: opacity $duration ease, transform $duration ease;
+    position: relative;
+    
+    &.enter-done {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@mixin reveal-side-left($duration: 0.5s) {
+    opacity: 0;
+    transform: translateX(-3rem);
+    transition: opacity $duration ease, transform $duration ease;
+    position: relative;
+    
+    &.enter-done {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@mixin reveal-side-right($duration: 0.5s) {
+    opacity: 0;
+    transform: translateX(3rem);
+    transition: opacity $duration ease, transform $duration ease;
+    position: relative;
+    
+    &.enter-done {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@mixin reveal-pop-up($duration: 0.5s, $scale: 0.8) {
+    opacity: 0;
+    transform: scale($scale);
+    transition: opacity $duration cubic-bezier(.5,1.63,.93,1.21), transform $duration cubic-bezier(.5,1.63,.93,1.21);
+    position: relative;
+    
+    &.enter-done {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
