@@ -13,7 +13,7 @@ import { CSSTransition } from 'react-transition-group';
 import useOnScreen from "../hooks/useOnScreen";
 
 const ProjectTemplate = ({ data }) => {
-    
+
     const PROJECT_DESC = data.project.projectFields.overview.replaceAll(/<\/?p>/ig, '\n');
 
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -44,105 +44,123 @@ const ProjectTemplate = ({ data }) => {
 
 
     useEffect(() => {
-        const imagePreload = new Image();
-        imagePreload.src = data.project.projectFields.mockUpImage.sourceUrl;
-        imagePreload.onload = () => dataLoaded();
+        const desktopImagePreload = new Image();
+        desktopImagePreload.src = data.project.projectFields.mockUpImage.sourceUrl;
+        desktopImagePreload.onload = () => dataLoaded();
+
+        const tabletImagePreload = new Image();
+        tabletImagePreload.src = data.project.projectFields.mockUpImageTablet.sourceUrl;
+        tabletImagePreload.onload = () => dataLoaded();
+
+        const mobileImagePreload = new Image();
+        mobileImagePreload.src = data.project.projectFields.mockUpImageMobile.sourceUrl;
+        mobileImagePreload.onload = () => dataLoaded();
 
         const dataLoaded = () => {
-            setImageLoaded(true);
+            if (desktopImagePreload.complete && 
+                tabletImagePreload.complete && 
+                mobileImagePreload.complete) setImageLoaded(true);
         }
     }, []);
 
     return (
-        imageLoaded &&
+
         <Layout>
             <Seo
                 title={data.project.title}
                 description={PROJECT_DESC}
             />
-            <article className="project-template">
-                <CSSTransition in={titleInScreen[0]} timeout={0}>
-                    <header ref={titleRef} className="project-header">
-                        <h1 className="project-title">{data.project.title}</h1>
-                        <div className="links">
-                            {data.project.projectFields.githubRepoLink &&
-                                (<a href={data.project.projectFields.githubRepoLink}
-                                    rel="noreferrer"
-                                    target="_blank">
-                                    <GitHub />
-                                </a>)
-                            }
-                            {data.project.projectFields.liveLink &&
-                                (<a href={data.project.projectFields.liveLink}
-                                    rel="noreferrer"
-                                    target="_blank">
-                                    <Link />
-                                </a>)
-                            }
-                        </div>
-                    </header>
-                </CSSTransition>
 
-                <CSSTransition in={mockupInScreen[0]} timeout={0}>
-                    <picture ref={mockupRef} className="mockup-image">
-                        <source media="(min-width: 56em)" srcSet={data.project.projectFields.mockUpImage.sourceUrl} />
-                        <source media="(min-width: 35em)" srcSet={data.project.projectFields.mockUpImageTablet.sourceUrl} />
-                        <source media="(max-width: 35em)" srcSet={data.project.projectFields.mockUpImageMobile.sourceUrl} />
-                        <img src={data.project.projectFields.mockUpImage.sourceUrl} alt={data.project.projectFields.mockUpImage.sourceUrl} />
-                    </picture>
-                </CSSTransition>
-
-                <CSSTransition in={overviewInScreen[0]} timeout={0}>
-                    <section ref={overviewRef} className="project-section">
-                        <h2>Overview</h2>
-                        {parse(data.project.projectFields.overview)}
-                    </section>
-                </CSSTransition>
-
-                <CSSTransition in={featureInScreen[0]} timeout={0}>
-                    <section ref={featureRef} className="project-section">
-                        <h2>Features</h2>
-                        <ul>
-                            { data.project.projectFields.features.map((feature, i) => (
-                                <li key={i}>{feature.feature}</li>
-                            )) }
-                        </ul>
-                    </section>
-                </CSSTransition>
-
-                {data.project.projectFields.techStack?.length > 0 &&
-                    (
-                        <CSSTransition in={techStackInScreen[0]} timeout={0}>
-                            <section ref={techStackRef} className="project-section">
-                                <h2>Tech Stack</h2>
-                                <div className="tech-stack">
-                                    {data.project.projectFields.techStack.map((tech, i) => (
-                                        <TechIcons key={tech} icon={tech} />
-                                    ))}
-                                </div>
-                            </section>
-                        </CSSTransition>
-                    )}
-
-                <section className="project-section other-projects">
-                    <CSSTransition in={projectsTtitleInScreen[0]} timeout={0}>
-                        <h2 ref={projectsTitleRef}>Other Projects</h2>
+            {imageLoaded &&
+                <article className="project-template">
+                    <CSSTransition in={titleInScreen[0]} timeout={0}>
+                        <header ref={titleRef} className="project-header">
+                            <h1 className="project-title">{data.project.title}</h1>
+                            <div className="links">
+                                {data.project.projectFields.githubRepoLink &&
+                                    (<a href={data.project.projectFields.githubRepoLink}
+                                        rel="noreferrer"
+                                        target="_blank">
+                                        <GitHub />
+                                    </a>)
+                                }
+                                {data.project.projectFields.liveLink &&
+                                    (<a href={data.project.projectFields.liveLink}
+                                        rel="noreferrer"
+                                        target="_blank">
+                                        <Link />
+                                    </a>)
+                                }
+                            </div>
+                        </header>
                     </CSSTransition>
 
-                    {data.previous &&
-                        <CSSTransition in={projectPreviousInScreen[0]} timeout={0}>
-                            <Project ref={projectPreviousRef} project={data.previous} />
-                        </CSSTransition>
-                    }
+                    <CSSTransition in={mockupInScreen[0]} timeout={0}>
+                        <picture ref={mockupRef} className="mockup-image">
+                            <source media="(min-width: 56em)" srcSet={data.project.projectFields.mockUpImage.srcSet} />
+                            <source media="(min-width: 35em)" srcSet={data.project.projectFields.mockUpImageTablet.srcSet} />
+                            <source media="(max-width: 35em)" srcSet={data.project.projectFields.mockUpImageMobile.srcSet} />
+                            <img 
+                                src={data.project.projectFields.mockUpImage.sourceUrl} 
+                                alt={data.project.projectFields.mockUpImage.altText} 
+                                srcSet={data.project.projectFields.mockUpImage.srcSet} 
+                                sizes={data.project.projectFields.mockUpImage.sizes} 
+                            />
+                        </picture>
+                    </CSSTransition>
 
-                    {data.next &&
-                        <CSSTransition in={projectNextInScreen[0]} timeout={0}>
-                            <Project ref={projectNextRef} project={data.next} />
-                        </CSSTransition>
-                    }
-                </section>
+                    <CSSTransition in={overviewInScreen[0]} timeout={0}>
+                        <section ref={overviewRef} className="project-section">
+                            <h2>Overview</h2>
+                            {parse(data.project.projectFields.overview)}
+                        </section>
+                    </CSSTransition>
 
-            </article>
+                    <CSSTransition in={featureInScreen[0]} timeout={0}>
+                        <section ref={featureRef} className="project-section">
+                            <h2>Features</h2>
+                            <ul>
+                                {data.project.projectFields.features.map((feature, i) => (
+                                    <li key={i}>{feature.feature}</li>
+                                ))}
+                            </ul>
+                        </section>
+                    </CSSTransition>
+
+                    {data.project.projectFields.techStack?.length > 0 &&
+                        (
+                            <CSSTransition in={techStackInScreen[0]} timeout={0}>
+                                <section ref={techStackRef} className="project-section">
+                                    <h2>Tech Stack</h2>
+                                    <div className="tech-stack">
+                                        {data.project.projectFields.techStack.map((tech, i) => (
+                                            <TechIcons key={tech} icon={tech} />
+                                        ))}
+                                    </div>
+                                </section>
+                            </CSSTransition>
+                        )}
+
+                    <section className="project-section other-projects">
+                        <CSSTransition in={projectsTtitleInScreen[0]} timeout={0}>
+                            <h2 ref={projectsTitleRef}>Other Projects</h2>
+                        </CSSTransition>
+
+                        {data.previous &&
+                            <CSSTransition in={projectPreviousInScreen[0]} timeout={0}>
+                                <Project ref={projectPreviousRef} project={data.previous} />
+                            </CSSTransition>
+                        }
+
+                        {data.next &&
+                            <CSSTransition in={projectNextInScreen[0]} timeout={0}>
+                                <Project ref={projectNextRef} project={data.next} />
+                            </CSSTransition>
+                        }
+                    </section>
+
+                </article>
+            }
         </Layout>
     )
 }
@@ -158,13 +176,16 @@ export const projectQuery = graphql`
         project: wpProject(id: { eq: $id }) {
             projectFields {
                 mockUpImage {
+                    altText
+                    sizes
+                    srcSet
                     sourceUrl
                 }
                 mockUpImageTablet {
-                    sourceUrl
+                    srcSet
                 }
                 mockUpImageMobile {
-                    sourceUrl
+                    srcSet
                 }
                 features {
                     feature
