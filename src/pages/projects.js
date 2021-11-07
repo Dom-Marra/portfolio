@@ -1,7 +1,7 @@
 import React, { createRef, useRef, useState } from 'react';
 
 import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Seo from '../components/seo';
 import { graphql } from "gatsby";
 import Project from '../components/project';
 import { CSSTransition } from 'react-transition-group';
@@ -21,7 +21,7 @@ const ProjectsPage = ({ data }) => {
 
     return (
         <Layout>
-            <SEO 
+            <Seo 
                 title="Projects"
                 description="View all of my projects!"
             />
@@ -65,7 +65,10 @@ export const projectsQuery = graphql`
                 title
                 featuredImage {
                     node {
-                    sourceUrl
+                        altText
+                        sizes
+                        srcSet
+                        sourceUrl
                     }
                 }
                 projectFields {

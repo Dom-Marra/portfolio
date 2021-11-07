@@ -6,7 +6,13 @@ const Project = ({ project }, ref) => (
     <Link ref={ref} to={`/projects/${project.slug}`} className="project-tile-link">
         <figure className="project-tile">
             <div className="project-tile-image-wrapper">
-                <img src={project.featuredImage.node.sourceUrl} alt={project.title} />
+                <img 
+                    src={project.featuredImage.node.sourceUrl} 
+                    alt={project.featuredImage.node.altText} 
+                    srcSet={project.featuredImage.node.srcSet} 
+                    sizes={project.featuredImage.node.sizes} 
+                    
+                />
             </div>
             <div className="project-tile-description">
                 <p>{project.title}</p>

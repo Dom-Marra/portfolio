@@ -3,7 +3,7 @@
 .main-header {
     position: fixed;
     background-color: vars.$p-dark;
-    top: 0;
+    bottom: 0;
     width: 100%;
     height: 3.75rem;
     z-index: 100;
@@ -11,79 +11,38 @@
     justify-content: space-between;
     align-items: center;
 
-    .header-logo {
-        display: block;
-        height: 100%;
-        box-sizing: border-box;
-        padding: 0.75rem;
-
-        img {
-            height: 100%;
-            width: auto;
-        }
-    }
-
-    .menu-toggle {
-        margin-right: 0.5rem;
-        background-color: transparent;
-        border: none;
-        color: vars.$text-color;
-
-        &:hover,
-        &:focus {
-            outline: none;
-            color: vars.$s-normal;
-            cursor: pointer;
-        }
-    }
-
     .main-nav {
-        position: absolute;
-        top: 3.75rem;
         width: 100%;
-        height: calc(100vh - 3.75rem);
-        background-color: vars.$p-dark;
-        visibility: hidden;
-        opacity: 0;
-
-        &.opened,
-        &.closed {
-            transition: visibility 0.25s ease-in-out, opacity 0.25s ease-in-out;
-        }
-
-        &.opened {
-            visibility: visible;
-            opacity: 1;
-        }
+        height: 100%;
 
         ul {
-            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 20rem;
+            margin: 0 auto;
             width: 100%;
             list-style: none;
             text-align: center;
-            padding: 0;
+            padding: 0 1.5rem;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            box-sizing: border-box;
 
             li {
-                margin: 1.5rem 0;
+                margin: 0;
 
                 a {
                     font-size: 1.25rem;
                     display: block;
                     color: vars.$text-color;
-                    padding: 1rem 0.5rem;
                     position: relative;
-                    transition: color 0.15s ease-in-out;
+                    transition: color 0.3s ease-in-out;
 
                     &.active-nav-link {
                         color: vars.$s-normal;
 
                         &::after {
-                            width: calc(100% - 1rem);
+                            width: 100%;
                             background-color: vars.$s-normal;
                         }
                     }
@@ -92,7 +51,7 @@
                         color: vars.$p-lightest;
 
                         &::after {
-                            width: calc(100% - 1rem);
+                            width: 100%;
                             background-color: vars.$p-lightest;
                         }
                     }
@@ -102,7 +61,7 @@
                         position: absolute;
                         height: 0.25rem;
                         width: 0%;
-                        bottom: 0.75rem;
+                        bottom: -0.15rem;
                         left: 50%;
                         transform: translateX(-50%);
                         transition: width 0.15s ease-in-out, color 0.15s ease-in-out;
@@ -112,16 +71,20 @@
         }
     }
 
-    @media screen and (min-width: 35em) {
+    @media screen and (min-width: 35em) and (min-height: 28em) {
         position: sticky;
         height: 100vh;
         flex-direction: column;
+        justify-content: center;
+        top: 0;
         
         .header-logo {
             display: block;
             height: auto;
             width: 90%;
             margin: 4rem auto 0;
+            padding: 0.75rem;
+            box-sizing: border-box;
     
             img {
                 height: auto;
@@ -143,13 +106,19 @@
             margin-bottom: 4rem;
     
             ul {
+                flex-direction: column;
+                justify-content: center;
                 width: 100%;
                 height: 100%;
+
+                li {
+                    margin: 2rem 0;
+                }
             }
         }
     }
 
-    @media screen and (min-width: 56em) {
+    @media screen and (min-width: 56em) and (min-height: 36em) {
         .header-logo {
             width: 50%;
         }
