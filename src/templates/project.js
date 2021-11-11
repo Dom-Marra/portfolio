@@ -205,6 +205,9 @@ export const projectQuery = graphql`
             title
             featuredImage {
                 node {
+                    altText
+                    sizes
+                    srcSet
                     sourceUrl
                 }
             }
@@ -218,6 +221,9 @@ export const projectQuery = graphql`
             title
             featuredImage {
                 node {
+                    altText
+                    sizes
+                    srcSet
                     sourceUrl
                 }
             }
