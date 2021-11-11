@@ -49,7 +49,7 @@ function Navbar() {
         <header className="main-header">
             {   (navState === 'desktop' || navState === 'tab') &&
 
-                <Link to="/" className="header-logo" onClick={() => {}}>
+                <Link to="/" title="Home" className="header-logo" onClick={() => {}}>
                     <img src={Logo} alt="Dominic Marra logo" />
                 </Link>
             }
@@ -58,17 +58,17 @@ function Navbar() {
             <nav className={`main-nav ${navState}`}>
                 <ul>
                     <li>
-                        <Link to="/" activeClassName="active-nav-link" >
+                        <Link to="/" title="Home" activeClassName="active-nav-link" >
                             { navState === 'desktop' ? 'Home' : <Home />}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/about/" activeClassName="active-nav-link" >
+                        <Link to="/about/" title="About" activeClassName="active-nav-link" >
                             { navState === 'desktop' ? 'About Me' : <User />}
                         </Link>
                     </li>
                     <li>
-                        <Link to="/projects/" activeClassName="active-nav-link" >
+                        <Link to="/projects/" title="Projects" activeClassName="active-nav-link" >
                             { navState === 'desktop' ? 'Projects' : <Code />}
                         </Link>
                     </li>
