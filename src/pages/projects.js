@@ -9,7 +9,7 @@ import useOnScreen from "../hooks/useOnScreen";
 
 const ProjectsPage = ({ data }) => {
     const ANIMATION_TIME = 500;
-    const projects = data.allWpProject.nodes;
+    const projects = data.portfolio.projects.nodes;
 
     const titleRef = useRef();
     const titleInScreen = useOnScreen([titleRef]);
@@ -59,20 +59,22 @@ export default ProjectsPage;
 
 export const projectsQuery = graphql`
     query Projects {
-        allWpProject {
-            nodes {
-                slug
-                title
-                featuredImage {
-                    node {
-                        altText
-                        sizes
-                        srcSet
-                        sourceUrl
+        portfolio {
+            projects {
+                nodes {
+                    slug
+                    title
+                    featuredImage {
+                        node {
+                            altText
+                            sizes(size: PROJECT_TUMBMAILS)
+                            srcSet
+                            sourceUrl
+                        }
                     }
-                }
-                projectFields {
-                    caption
+                    projectFields {
+                        caption
+                    }
                 }
             }
         }
