@@ -148,13 +148,13 @@ const ProjectTemplate = ({ data }) => {
 
                         {data.previous &&
                             <CSSTransition in={projectPreviousInScreen[0]} timeout={0}>
-                                <Project ref={projectPreviousRef} project={data.previous} />
+                                <Project ref={projectPreviousRef} project={data.previous.project} />
                             </CSSTransition>
                         }
 
                         {data.next &&
                             <CSSTransition in={projectNextInScreen[0]} timeout={0}>
-                                <Project ref={projectNextRef} project={data.next} />
+                                <Project ref={projectNextRef} project={data.next.project} />
                             </CSSTransition>
                         }
                     </section>
@@ -170,8 +170,8 @@ export default ProjectTemplate;
 export const projectQuery = graphql`
     query ProjectByID(
         $id: String!
-        $previousProjectId: String
-        $nextProjectId: String
+        $previousProjectId: ID!
+        $nextProjectId: ID!
     ) {
         project: wpProject(id: { eq: $id }) {
             projectFields {
@@ -200,35 +200,39 @@ export const projectQuery = graphql`
             title
         }
 
-        previous: wpProject(id: { eq: $previousProjectId }) {
-            slug
-            title
-            featuredImage {
-                node {
-                    altText
-                    sizes
-                    srcSet
-                    sourceUrl
+        previous: portfolio {
+            project(id: $previousProjectId) {
+                slug
+                title
+                featuredImage {
+                    node {
+                        altText
+                        sizes(size: PROJECT_TUMBMAILS)
+                        srcSet
+                        sourceUrl
+                    }
                 }
-            }
-            projectFields {
-                caption
+                projectFields {
+                    caption
+                }
             }
         }
         
-        next: wpProject(id: { eq: $nextProjectId }) {
-            slug
-            title
-            featuredImage {
-                node {
-                    altText
-                    sizes
-                    srcSet
-                    sourceUrl
+        next: portfolio {
+            project(id: $nextProjectId) {
+                slug
+                title
+                featuredImage {
+                    node {
+                        altText
+                        sizes(size: PROJECT_TUMBMAILS)
+                        srcSet
+                        sourceUrl
+                    }
                 }
-            }
-            projectFields {
-                caption
+                projectFields {
+                    caption
+                }
             }
         }
     }

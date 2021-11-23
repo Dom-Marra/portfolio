@@ -31,19 +31,28 @@
     @media screen and (min-width: 56em) {
         width: 90%;
         max-width: 85rem;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        display: grid;
+        grid-template-columns:  repeat(2, 1fr);
+        column-gap: 1.5rem;
 
         h1 {
             text-align: left;
             width: 100%;
+            grid-column: 1/span 2;
         }
 
         .project-tile-link { 
-            min-width: 20rem;
-            max-width: 30%;
-            flex: 1;
+            width: 100%;
+            max-width: 500px;
+            justify-self: center;
+        }
+    }
+
+    @media screen and (min-width: 80em) { 
+        grid-template-columns:  repeat(3, 1fr);
+
+        h1 {
+            grid-column: 1/span 3;
         }
     }
 }
