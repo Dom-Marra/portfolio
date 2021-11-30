@@ -10,6 +10,7 @@
   "dependencies": {
     "@fontsource/quicksand": "^4.5.1",
     "@fontsource/roboto": "^4.5.1",
+    "extract-files": "^11.0.0",
     "gatsby": "^4.0.0",
     "gatsby-image": "^3.3.0",
     "gatsby-plugin-image": "^2.2.0",
