@@ -73,17 +73,24 @@
         }
     }
 
-    .mockup-image {
+    .mockup-image-container {
         display: block;
         height: auto;
         margin: 2rem auto;
         @include mix.reveal-up;
 
-        source, img {
-            max-width: 100%;
-            display: block;
-            height: auto;
-            margin: auto;
+        .mockup-image {
+            @media screen and (min-width: 35em) {
+               div:first-child {
+                   padding-top: calc(100% * (683%/512%)) !important;
+               }
+            }
+
+            @media screen and (min-width: 56em) {
+                div:first-child { 
+                    padding-top: 56.25% !important;
+                }
+            }
         }
     }
 
