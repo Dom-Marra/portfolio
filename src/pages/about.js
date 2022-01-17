@@ -1,4 +1,4 @@
-import React, { createRef, useRef, useState, useEffect } from "react"
+import React, { createRef, useRef } from "react"
 import Seo from "../components/seo"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
@@ -6,38 +6,28 @@ import TechIcons from "../components/techIcons"
 import parse from 'html-react-parser';
 import { CSSTransition } from 'react-transition-group';
 import useOnScreen from "../hooks/useOnScreen";
-
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const AboutMe = ({ data }) => {
 
     const ABOUT_ME_DESC = data.wpPage.aboutMeFields.description.replaceAll(/<\/?p>/ig, '\n');
 
-    const [imageLoaded, setImageLoaded] = useState(false);
+    console.log(data);
 
     const titleRef = useRef();
-    const titleInScreen = useOnScreen([titleRef], '0px', imageLoaded);
+    const titleInScreen = useOnScreen([titleRef], '0px');
 
     const descRef = useRef();
-    const descInScreen = useOnScreen([descRef], '0px', imageLoaded);
+    const descInScreen = useOnScreen([descRef], '0px');
 
     const imgRef = useRef();
-    const imgInScreen = useOnScreen([imgRef], '0px', imageLoaded);
+    const imgInScreen = useOnScreen([imgRef], '0px');
 
     const skillTitleRef = useRef();
-    const skillTitleInScreen = useOnScreen([skillTitleRef], '0px', imageLoaded);
+    const skillTitleInScreen = useOnScreen([skillTitleRef], '0px');
 
     const skillRefs = useRef(data.wpPage.aboutMeFields.skills.map(() => createRef()));
-    const skillsInScreen = useOnScreen(skillRefs.current, '0px', imageLoaded);
-
-    useEffect(() => {
-        const imagePreload = new Image();
-        imagePreload.src = data.wpPage.aboutMeFields.image.sourceUrl;
-        imagePreload.onload = () => dataLoaded();
-
-        const dataLoaded = () => {
-            setImageLoaded(true);
-        }
-    }, []);
+    const skillsInScreen = useOnScreen(skillRefs.current, '0px');
 
     return (
         <Layout>
@@ -45,43 +35,40 @@ const AboutMe = ({ data }) => {
                 title="About Me"
                 description={ABOUT_ME_DESC}
             />
-            {imageLoaded &&
-                <section className="about-me-section">
-                    <CSSTransition in={titleInScreen[0]} timeout={0}>
-                        <h1 ref={titleRef}>About Me</h1>
-                    </CSSTransition>
+            <section className="about-me-section">
+                <CSSTransition in={titleInScreen[0]} timeout={0}>
+                    <h1 ref={titleRef}>About Me</h1>
+                </CSSTransition>
 
-                    <CSSTransition in={descInScreen[0]} timeout={0}>
-                        <div ref={descRef} className="description">
-                            {parse(data.wpPage.aboutMeFields.description)}
-                        </div>
-                    </CSSTransition>
+                <CSSTransition in={descInScreen[0]} timeout={0}>
+                    <div ref={descRef} className="description">
+                        {parse(data.wpPage.aboutMeFields.description)}
+                    </div>
+                </CSSTransition>
 
-                    <CSSTransition in={imgInScreen[0]} timeout={0}>
-                        <img
-                            className="profile-pic"
-                            src={data.wpPage.aboutMeFields.image.sourceUrl}
-                            srcSet={data.wpPage.aboutMeFields.image.srcSet}
-                            sizes={data.wpPage.aboutMeFields.image.sizes}
+                <CSSTransition in={imgInScreen[0]} timeout={0}>
+                    <div ref={imgRef} className="profile-pic">
+                        <GatsbyImage 
+                            className="mockup-image" 
+                            image={getImage(data.wpPage.aboutMeFields.image.localFile)} 
                             alt={data.wpPage.aboutMeFields.image.altText}
-                            ref={imgRef}
                         />
+                    </div>
+                </CSSTransition>
+
+                {(<div className="skills-container">
+                    <CSSTransition in={skillTitleInScreen[0]} timeout={0}>
+                        <h2 ref={skillTitleRef}>Skills</h2>
                     </CSSTransition>
-
-                    {(<div className="skills-container">
-                        <CSSTransition in={skillTitleInScreen[0]} timeout={0}>
-                            <h2 ref={skillTitleRef}>Skills</h2>
+                    {data.wpPage.aboutMeFields.skills.map((skill, i) => (
+                        <CSSTransition in={skillsInScreen[i]} timeout={0} key={skill}>
+                            <TechIcons ref={skillRefs.current[i]} icon={skill} />
                         </CSSTransition>
-                        {data.wpPage.aboutMeFields.skills.map((skill, i) => (
-                            <CSSTransition in={skillsInScreen[i]} timeout={0} key={skill}>
-                                <TechIcons ref={skillRefs.current[i]} icon={skill} />
-                            </CSSTransition>
-                        ))}
-                    </div>)
-                    }
+                    ))}
+                </div>)
+                }
 
-                </section>
-            }
+            </section>
         </Layout>
     )
 }
@@ -95,9 +82,11 @@ export const aboutMeQuery = graphql`
                 description
                 image {
                     altText
-                    sizes
-                    srcSet
-                    sourceUrl
+                    localFile {
+                        childImageSharp {
+                            gatsbyImageData(formats: WEBP, layout: FULL_WIDTH, placeholder: DOMINANT_COLOR, transformOptions: {fit: CONTAIN})
+                        }
+                    }
                 }
                 skills
             }
